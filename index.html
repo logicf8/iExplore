@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iExplore</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="lazyrabbitico.ico?v=2" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <h1>iExplore</h1>
+        
+        <textarea id="inputText" rows="10" placeholder="Klistra in text med bristlista här..."></textarea>
+        <button id="processBtn">Bearbeta text</button>
+
+        <div id="outputContainer" class="hidden">
+            <h2 class="label">Tillfälligt slut:</h2>
+            <table id="resultTable">
+                <thead>
+                    <tr>
+                        <th>Ant</th>
+                        <th id="sortArticle" class="sortable">Artikel <span class="sort-arrow">▼</span></th>
+                        <th>Art📋</th>
+                        <th id="sortWeek" class="sortable">V. <span class="sort-arrow">▼</span></th>
+                        <th>Åter</th>
+                        <th>Klar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Raderna genereras här med JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

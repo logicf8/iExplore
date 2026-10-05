@@ -1,0 +1,299 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --main: #0558a3;
+  --main-dark: #004f93;
+  --main-light: #f0f6fc;
+
+  --accent: #ffdb00;
+  --accent-dark: #f8d300;
+  --btn-hover-accent: var(--main-dark);
+
+  --bg-main: #d8e2ef;
+  --bg-card: #ffffff;
+
+  --border-main: #8aa4d3;
+
+  --text-dark: #111;
+  --text-light: #ffffff;
+  
+  --shadow: rgba(0,0,0,0.08);
+  --danger: rgb(212, 2, 2);
+  --h1-line-width: 260px;
+}
+
+/* ===== Grundstil ===== */
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-main);
+  margin: 0;
+  padding: 20px;
+  color: var(--text-dark);
+}
+
+input, textarea, button, select {
+  font-family: inherit;
+}
+
+/* ===== Containers ===== */
+.container {
+  max-width: 810px;
+  margin: 20px auto;
+  padding: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-main);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px var(--shadow);
+  box-sizing: border-box;
+}
+
+/* ===== Typography ===== */
+h1 {
+  text-align: center;
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.02rem;
+  margin-top: 0;
+  margin-bottom: 14px;
+  color: var(--main);
+  position: relative;
+  text-shadow: 0.5px 0.2px 0.5px rgba(0,0,0,0.3);
+}
+
+h1::after {
+  content: "";
+  display: block;
+  width: var(--h1-line-width, 260px);
+  height: 3px;
+  margin: 6px auto 0;
+  background-color: var(--accent);
+  border-radius: 2px;
+}
+
+p.description {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+/* ===== Textarea (Huvudfältet) ===== */
+textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 8px;
+  padding: 8px;
+  letter-spacing: 0.02em;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--main);
+}
+
+/* ===== Buttons ===== */
+button {
+  padding: 10px 16px;
+  margin: 4px 0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--main);
+  color: var(--text-light);
+  border: none;
+  border-radius: 5px;
+  text-shadow: 0.2px 0.2px 0.7px rgba(0,0,0,0.3);
+}
+
+button:hover {
+  background-color: var(--main-dark);
+}
+
+.secondary-btn {
+  background-color: var(--accent);
+  color: var(--btn-hover-accent);
+  text-shadow: none;
+}
+
+.secondary-btn:hover {
+  background-color: var(--accent-dark);
+}
+
+/* ===== Egna stilar för detta verktyg ===== */
+.hidden {
+  display: none;
+}
+
+.label {
+  color: var(--danger);
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 24px;
+  margin-bottom: 10px;
+  text-shadow: 0.2px 0.2px 0.7px rgba(0,0,0,0.3);
+}
+
+/* ===== Tabell ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+table th, table td {
+  border: 1px solid var(--border-main);
+  padding: 3px 4px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+table th {
+  background-color: var(--main-light);
+  color: var(--main-dark);
+  font-weight: 600;
+}
+
+/* Sorterbara kolumner */
+table th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+table th.sortable:hover {
+  background-color: #e2eeea;
+}
+
+table th.active-sort {
+  color: var(--main);
+  text-decoration: underline;
+}
+
+.sort-arrow {
+  font-size: 10px;
+  margin-left: 2px;
+  display: inline-block;
+}
+
+/* Svag blå bakgrund på varannan rad */
+table tbody tr:nth-child(even) {
+  background-color: #f4f8fc;
+}
+
+/* KOMPRIMERING AV KOLUMNER */
+
+/* 1. Antal */
+table th:nth-child(1), table td:nth-child(1) {
+  width: 1%;
+  white-space: nowrap;
+}
+
+/* 2. Artikel */
+table th:nth-child(2), table td:nth-child(2) {
+  width: 1%;
+  white-space: nowrap;
+}
+
+/* 3. Kopiera-ikon */
+table th:nth-child(3), table td:nth-child(3) {
+  width: 1%;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* 4. Vecka */
+table th:nth-child(4), table td:nth-child(4) {
+  width: 1%;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* 5. Åter (Input-box) */
+table th:nth-child(5), table td:nth-child(5) {
+  width: 99%;
+}
+
+/* 6. Klar (Checkbox) */
+table th:nth-child(6), table td:nth-child(6) {
+  width: 1%;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Kopieringsknappen i tabellen */
+table td button.btn-copy {
+  margin: 0 auto;
+  padding: 1px 3px;
+  font-size: 16px;
+  width: auto;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  text-shadow: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+table td button.btn-copy:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+}
+
+/* Vecka-inputfältet */
+input.week-input {
+  width: 32px;
+  text-align: center;
+  padding: 3px 2px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+input.week-input:focus {
+  outline: none;
+  border-color: var(--main);
+}
+
+/* Auto-expanderande textarea i tabellen */
+textarea.table-textarea {
+  width: 100%;
+  height: auto;
+  min-height: 26px;
+  margin: 0;
+  padding: 3px 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  resize: none;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: block;
+  background-color: #ffffff;
+}
+
+textarea.table-textarea:focus {
+  outline: none;
+  border-color: var(--main);
+  background-color: #ffffff;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.2);
+  margin: 0 4px;
+  cursor: pointer;
+}
