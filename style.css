@@ -212,7 +212,7 @@ table th:nth-child(3), table td:nth-child(3) {
   text-align: center;
 }
 
-/* 4. Vecka */
+/* 4. Vecka / Datum */
 table th:nth-child(4), table td:nth-child(4) {
   width: 1%;
   white-space: nowrap;
@@ -252,9 +252,9 @@ table td button.btn-copy:hover {
   border-radius: 4px;
 }
 
-/* Vecka-inputfältet */
+/* Vecka/Datum-inputfältet */
 input.week-input {
-  width: 32px;
+  width: 85px; /* <-- Ändrad från 32px till 85px för att rymma hela datumet */
   text-align: center;
   padding: 3px 2px;
   border: 1px solid #ccc;
