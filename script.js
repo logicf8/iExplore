@@ -109,14 +109,14 @@ document.addEventListener("DOMContentLoaded", () => {
         applySortAndRender();
     });
 
-    // Klick på V.-rubrik
+    // Klick på Datum/V.-rubrik
     sortWeekHeader.addEventListener("click", () => {
         saveCurrentInputState();
         if (sortState.column === 'week') {
             sortState.weekAsc = !sortState.weekAsc;
         } else {
             sortState.column = 'week';
-            sortState.weekAsc = true; // initialt 1-99
+            sortState.weekAsc = true; // initialt 1-99 / äldst först
         }
         applySortAndRender();
     });
@@ -160,23 +160,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 const displayCmp = a.displayText.localeCompare(b.displayText, 'sv');
                 return sortState.articleAsc ? displayCmp : -displayCmp;
+                
             } else if (sortState.column === 'week') {
-                // Konvertera till nummer, tomma/icke-siffror hamnar sist
-                const valA = a.week !== "" ? parseInt(a.week, 10) : Infinity;
-                const valB = b.week !== "" ? parseInt(b.week, 10) : Infinity;
+                const valA = a.week || "";
+                const valB = b.week || "";
 
                 if (valA === valB) {
-                    // Sekundär sortering på namn om veckorna är lika
+                    // Sekundär sortering på namn om datum/veckorna är lika
                     return a.displayText.localeCompare(b.displayText, 'sv');
                 }
 
+                // Tomma fält hamnar alltid sist
+                if (valA === "") return 1;
+                if (valB === "") return -1;
+
+                // Använd localeCompare med numeric:true för att hantera datum, korta datum och veckor smart
                 if (sortState.weekAsc) {
-                    return valA - valB; // 1 -> 99
+                    return valA.localeCompare(valB, 'sv', { numeric: true });
                 } else {
-                    // Vid 99 -> 1 ska tomma fält fortfarande ligga längst ned
-                    if (valA === Infinity) return 1;
-                    if (valB === Infinity) return -1;
-                    return valB - valA;
+                    return valB.localeCompare(valA, 'sv', { numeric: true });
                 }
             }
         });
@@ -211,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
             btnKopiera.classList.add("btn-copy");
 
             btnKopiera.addEventListener("click", () => {
-                navigator.clipboard.writeText(article.artNr).then(() => {
+                navigator.clipboard.writeText(article.artNr.replace(/\./g, '')).then(() => {
                     const originalText = btnKopiera.textContent;
                     btnKopiera.textContent = "✔";
                     
@@ -223,18 +225,18 @@ document.addEventListener("DOMContentLoaded", () => {
             tdKopiera.appendChild(btnKopiera);
             tr.appendChild(tdKopiera);
 
-            // 4. Vecka (Input max 2 siffror)
+            // 4. Datum/Vecka (Input max 10 tecken för datum)
             const tdVecka = document.createElement("td");
             const inputVecka = document.createElement("input");
             inputVecka.type = "text";
-            inputVecka.inputMode = "numeric";
-            inputVecka.maxLength = 2;
-            inputVecka.placeholder = "v";
+            inputVecka.maxLength = 10;
+            inputVecka.placeholder = "Datum/V";
             inputVecka.value = article.week || "";
             inputVecka.classList.add("week-input");
 
             inputVecka.addEventListener("input", function () {
-                this.value = this.value.replace(/[^0-9]/g, "").slice(0, 2);
+                // Tillåt siffror och bindestreck, ta bort allt annat
+                this.value = this.value.replace(/[^0-9-]/g, "").slice(0, 10);
                 article.week = this.value;
             });
 
